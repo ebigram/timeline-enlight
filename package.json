@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "jq-web": "^0.5.1",
     "node-jq": "^1.11.3",
     "react": "17.0.1",
     "react-chrono": "^1.4.2",
