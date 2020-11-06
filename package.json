@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "jq-web": "^0.5.1",
     "node-jq": "^1.11.3",
     "ramda": "^0.27.1",
@@ -27,7 +28,7 @@
   "scripts": {
     "start": "npm run auth && npm run start",
     "app": "react-scripts start",
-    "auth": "node auth/server.js",
+    "auth": "node -r dotenv/config auth/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
