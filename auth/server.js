@@ -18,6 +18,7 @@ var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var SpotifyWebApi = require('spotify-web-api-node');
+var dotenv = require('dotenv').config();
 
 
 const scopes = [
@@ -41,13 +42,16 @@ const scopes = [
   'user-follow-read',
   'user-follow-modify'
 ];
-var client_id = process.env.client_id; // Your client id
-var client_secret = process.env.client_secret; // Your secret
+//dotenv.config({debug:true,path:"./"});
+var client_id = process.env.CLIENT_ID; // Your client id
+var client_secret = process.env.CLIENT_SECRET; // Your secret
+//console.log(process.env)
+//console.log("cid " + client_id)
 
 const spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://localhost:8888/callback',
-  clientId: client_id, // process.argv.slice(2)[0],
-  clientSecret:client_secret //process.argv.slice(2)[1]
+  clientId: client_id,
+  clientSecret: client_secret
 });
 
 const app = express();
@@ -56,6 +60,8 @@ app.get('/login', (req, res) => {
   const state = "some-state"
   const showDialog = true
   const responseType = 'token'
+  //@ts-ignore 
+  //! @types/spotify-web-api-node lagging behind latest 5.0.0 GH version
   res.redirect(spotifyApi.createAuthorizeURL(scopes,state,showDialog,responseType));
 });
 
@@ -63,6 +69,7 @@ app.get('/callback', (req, res) => {
   const error = req.query.error;
   const code = req.query.code;
   const state = req.query.state;
+  console.log(res.getHeaders())
  
    res.redirect("http://localhost:3000")
 /*  if (error) {

@@ -1,6 +1,7 @@
 import SpotifyWebApi from "spotify-web-api-node";
 import * as  ramda from  'ramda'
 import jq from 'jq-web'
+import {SpotifyGraphQLClient} from 'spotify-graphql'
 //import {setData} from './App'
 
 
@@ -38,9 +39,13 @@ export const getData = (callback:((arr:Array<string>)=>void)) => spotifyApi.getM
     // Output items
 //  console.log("Your 20 most recently played tracks are:");
     //res.body.items.forEach(item => console.log(item.track));
+    let albums
+    SpotifyGraphQLClient().query{
 
+    }
+/*
     const queryVideo = '.items[].track|{"contentTitle":getpath(["artists",0,"name"]),"contentText":.name,"media":{"type":"VIDEO","source":{"url":.preview_url}} }'
-    const queryImg = '.items[].track|{"contentTitle":getpath(["artists",0,"name"]),"contentText":.name,"media":{"type":"IMAGE","source":{"url":.preview_url}} }'
+    const queryImg = 'items[].images[1]'
 
 //  console.log("queryString: " + query)
 //  console.log("json response" + JSON.stringify(res.body.items))
@@ -50,10 +55,12 @@ export const getData = (callback:((arr:Array<string>)=>void)) => spotifyApi.getM
         var tracksImg :Array<string> = jq.json({
         items: res.body.items
     }, queryImg)
+   var p : Object = JSON.parse(tracksVideo[0])
+    
 let tracks : Array<string> = tracksVideo.flatMap((v,idx,x)=>Array<string>(v,tracksImg[idx]))
+*/
 
-
-    callback(tracks)
+    callback(albums)
 })
 //(async()=>
 //data = await getData()
